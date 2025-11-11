@@ -4,136 +4,230 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Abrar Zawad Safwan | Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg-color: #f9fafc;
+      --text-color: #333;
+      --accent: #4dc0b5;
+      --card-bg: #fff;
+    }
+    [data-theme="dark"] {
+      --bg-color: #121212;
+      --text-color: #f5f5f5;
+      --accent: #4dc0b5;
+      --card-bg: #1e1e1e;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
     body {
       font-family: 'Poppins', sans-serif;
-      background: #f9fafc;
-      color: #333;
-      line-height: 1.6;
+      background: var(--bg-color);
+      color: var(--text-color);
+      transition: all 0.4s ease;
     }
+
+    /* --- Header / Hero Section --- */
     header {
-      background: #1a1a1a;
-      color: #fff;
-      padding: 2rem 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
+      background: linear-gradient(135deg, #4dc0b5 0%, #2b7a78 100%);
+      color: white;
+      animation: fadeIn 1.5s ease-in-out;
     }
-    header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
-    header p a {
-      color: #4dc0b5;
+    header h1 { font-size: 3rem; font-weight: 700; }
+    header p { margin-top: 0.7rem; font-size: 1.1rem; }
+    header .socials {
+      margin-top: 1rem;
+    }
+    header .socials a {
+      color: white;
       text-decoration: none;
+      margin: 0 0.5rem;
+      font-weight: 600;
+      transition: opacity 0.3s;
     }
+    header .socials a:hover { opacity: 0.8; }
+
+    /* --- Sections --- */
     section {
-      padding: 3rem 8%;
-      max-width: 1200px;
+      padding: 4rem 10%;
+      max-width: 1100px;
       margin: auto;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
     }
+    section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     h2 {
       font-size: 2rem;
-      color: #222;
-      border-bottom: 3px solid #4dc0b5;
-      display: inline-block;
+      border-left: 5px solid var(--accent);
+      padding-left: 10px;
       margin-bottom: 1rem;
-      padding-bottom: 0.3rem;
     }
+
     ul { margin-left: 1rem; }
     li { margin-bottom: 0.5rem; }
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-    .project {
-      background: #fff;
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+    /* --- Project Cards --- */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 2rem;
     }
+    .project {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: transform 0.4s, box-shadow 0.4s;
+    }
+    .project:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+    }
+
+    /* --- Footer --- */
     footer {
       background: #1a1a1a;
       color: #ccc;
       text-align: center;
-      padding: 1rem 0;
+      padding: 1.2rem 0;
       font-size: 0.9rem;
     }
-    @media(max-width: 768px){
-      .grid { grid-template-columns: 1fr; }
+
+    /* --- Dark mode toggle --- */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--accent);
+      border: none;
+      color: white;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background 0.3s;
+      z-index: 1000;
+    }
+    .theme-toggle:hover { background: #3aa99e; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media(max-width: 768px) {
+      header h1 { font-size: 2.2rem; }
+      section { padding: 3rem 5%; }
     }
   </style>
 </head>
+
 <body>
+  <button class="theme-toggle" id="themeToggle">🌙</button>
 
   <header>
     <h1>Abrar Zawad Safwan</h1>
-    <p>
-      <a href="mailto:zawadsafwan.work@gmail.com">zawadsafwan.work@gmail.com</a> |
+    <p>Final Year Computer Science Student | Data Analyst | Developer</p>
+    <div class="socials">
+      <a href="mailto:zawadsafwan.work@gmail.com">Email</a> |
       <a href="https://github.com/zawadsafwan07" target="_blank">GitHub</a> |
-      <a href="https://linkedin.com/in/abrar-zawad-safwan" target="_blank">LinkedIn</a> |
-      +1 (825) 561-4612
-    </p>
+      <a href="https://linkedin.com/in/abrar-zawad-safwan" target="_blank">LinkedIn</a>
+    </div>
   </header>
 
-  <section>
+  <section id="highlights">
     <h2>Highlights</h2>
     <ul>
-      <li>Technically proficient in Python, JavaScript, C++, Java, SQL, and React.</li>
-      <li>Bridge the gap between technology and customers through clear communication and tailored solutions.</li>
-      <li>Strong background in sales communication, customer service, and relationship building.</li>
+      <li>Proficient in Python, JavaScript, C++, Java, SQL, and React.</li>
+      <li>Bridge the gap between technology and customers through technical and communication skills.</li>
+      <li>Strong background in sales communication and relationship building.</li>
     </ul>
   </section>
 
-  <section>
+  <section id="education">
     <h2>Education</h2>
     <p><strong>University of Calgary</strong> — Bachelor of Computer Science (GPA: 3.7)</p>
     <p><em>Sep 2021 – Present</em></p>
-    <p><b>Relevant Coursework:</b> Algorithms, Data Structures, Operating Systems, Database Management, AI/ML, Web Development</p>
+    <p>Relevant coursework: Algorithms, OS, Database Management, AI/ML, Web Development.</p>
     <p><b>Award:</b> Faculty of Science Dean’s List 2024–2025</p>
   </section>
 
-  <section>
+  <section id="skills">
     <h2>Skills</h2>
-    <p><b>Programming:</b> Python, JavaScript, C/C++, Java, SQL, HTML, CSS, React</p>
-    <p><b>Tools:</b> MySQL, Power BI, MongoDB, Linux, Tableau, Firebase, Figma</p>
-    <p><b>Soft Skills:</b> Communication, Teamwork, Data Analysis, Customer Relationship Building</p>
+    <p><b>Programming:</b> Python, JavaScript, C/C++, Java, SQL, React, HTML, CSS</p>
+    <p><b>Tools:</b> MySQL, Power BI, MongoDB, Linux, Firebase, Figma</p>
+    <p><b>Soft Skills:</b> Communication, Teamwork, Problem Solving, Data Analysis</p>
   </section>
 
-  <section>
+  <section id="projects">
     <h2>Projects</h2>
     <div class="grid">
       <div class="project">
         <h3>Swift-Trek (2025)</h3>
-        <p>Full-stack travel platform with Firebase, real-time data, and user authentication. Designed owner dashboards and built an interactive messaging system in React.</p>
+        <p>Full-stack travel platform using Firebase for real-time data and authentication. Designed dashboards and messaging with React.</p>
       </div>
       <div class="project">
         <h3>The Grocery Analyzer (2023)</h3>
-        <p>React + MySQL app that helps students manage grocery budgets using data visualization and chart analysis for decision-making.</p>
+        <p>React & MySQL app helping students manage grocery budgets using chart-driven analysis.</p>
       </div>
       <div class="project">
         <h3>i-Travel Wise (2023)</h3>
-        <p>All-in-one travel design project using HTML, CSS, JS for exploring events, booking flights, and planning transit routes.</p>
+        <p>Travel web app design with HTML, CSS, and JS. Explored events, flights, and transit routes.</p>
       </div>
       <div class="project">
         <h3>Self-Checkout Station (2023)</h3>
-        <p>Team project to build a Java-FX ordering system with J-Unit testing for functionality assurance.</p>
+        <p>Java-FX ordering system for grocery stores with J-Unit testing for reliability.</p>
       </div>
     </div>
   </section>
 
-  <section>
+  <section id="experience">
     <h2>Work Experience</h2>
     <h3>Telus Digital — Online Data Analyst (Oct 2025 – Present)</h3>
     <ul>
-      <li>Enhanced accuracy of AI-driven digital maps through validation and QA processes.</li>
-      <li>Applied data analysis and web research to assess content relevance and integrity.</li>
-      <li>Collaborated in model training with structured feedback for machine learning refinement.</li>
+      <li>Enhanced AI-driven digital maps through validation and QA.</li>
+      <li>Applied data analysis to assess content relevance and accuracy.</li>
+      <li>Collaborated in model training and refinement.</li>
     </ul>
     <h3>Starbucks — Coffee Master / Barista Trainer (Jun 2022 – Present)</h3>
     <ul>
-      <li>Trained and mentored new baristas on customer service and operations.</li>
-      <li>Certified Coffee Master delivering coffee tastings and product sessions for customers.</li>
+      <li>Trained and mentored baristas in customer service and operations.</li>
+      <li>Delivered product knowledge and tastings as a Certified Coffee Master.</li>
     </ul>
   </section>
 
   <footer>
-    © 2025 Abrar Zawad Safwan — Built with ❤️ using HTML & CSS
+    © 2025 Abrar Zawad Safwan — Built with ❤️ using HTML, CSS & JS
   </footer>
 
+  <script>
+    // Smooth section animation on scroll
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("show");
+      });
+    }, { threshold: 0.15 });
+    sections.forEach(sec => observer.observe(sec));
+
+    // Light/Dark mode toggle
+    const toggle = document.getElementById("themeToggle");
+    toggle.addEventListener("click", () => {
+      document.body.dataset.theme = document.body.dataset.theme === "dark" ? "light" : "dark";
+      toggle.textContent = document.body.dataset.theme === "dark" ? "☀️" : "🌙";
+    });
+  </script>
 </body>
 </html>
